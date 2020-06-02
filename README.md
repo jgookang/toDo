@@ -1,5 +1,7 @@
 # toDo
 
 # Install
-    npm install --save-dev electron
+    npm install
     npn start
+# Make a app package
+    npm run pack
