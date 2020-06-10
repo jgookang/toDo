@@ -6,7 +6,7 @@ const path = require('path')
 const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
-const MinifyPlugin = require("babel-minify-webpack-plugin")
+const TerserPlugin = require('terser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -19,7 +19,7 @@ const { VueLoaderPlugin } = require('vue-loader')
  * that provide pure *.vue files that need compiling
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/webpack-configurations.html#white-listing-externals
  */
-let whiteListedModules = ['vue']
+let whiteListedModules = ['vue', 'vuetify']
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
@@ -51,10 +51,6 @@ let rendererConfig = {
         use: ['vue-style-loader', 'css-loader', 'sass-loader?indentedSyntax']
       },
       {
-        test: /\.less$/,
-        use: ['vue-style-loader', 'css-loader', 'less-loader']
-      },
-      {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader']
       },
@@ -77,10 +73,11 @@ let rendererConfig = {
           loader: 'vue-loader',
           options: {
             extractCSS: process.env.NODE_ENV === 'production',
-            loaders: {
-              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
-              scss: 'vue-style-loader!css-loader!sass-loader',
-              less: 'vue-style-loader!css-loader!less-loader'
+              loaders: {
+                sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
+                scss: 'vue-style-loader!css-loader!sass-loader',
+                less: 'vue-style-loader!css-loader!less-loader',
+                styl: 'vue-style-loader!css-loader!stylus-loader'
             }
           }
         }
@@ -131,12 +128,14 @@ let rendererConfig = {
         removeComments: true
       },
       nodeModules: process.env.NODE_ENV !== 'production'
-        ? path.resolve(__dirname, '../node_modules')
-        : false
+          ? path.resolve(__dirname, '../node_modules')
+          : false
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    noEmitOnErrors: true // NoEmitOnErrorsPlugin
+  },
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
@@ -157,9 +156,9 @@ let rendererConfig = {
  */
 if (process.env.NODE_ENV !== 'production') {
   rendererConfig.plugins.push(
-    new webpack.DefinePlugin({
-      '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
-    })
+      new webpack.DefinePlugin({
+        '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
+      })
   )
 }
 
@@ -169,15 +168,23 @@ if (process.env.NODE_ENV !== 'production') {
 if (process.env.NODE_ENV === 'production') {
   rendererConfig.devtool = ''
 
+  rendererConfig.optimization = Object.assign(rendererConfig.optimization, {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  })
+
   rendererConfig.plugins.push(
-    new MinifyPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../static'),
-        to: path.join(__dirname, '../dist/electron/static'),
-        ignore: ['.*']
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '../static'),
+          to: path.join(__dirname, '../dist/electron/static'),
+          globOptions: {
+            ignore: ['.*']
+          }
+        }
+      ]
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),

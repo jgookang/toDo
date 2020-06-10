@@ -3,37 +3,44 @@
   "env": {
     "test": {
       "presets": [
-        ["env", {
-          "targets": { "node": 7 }
-        }],
-        "stage-0"
+        [
+          "@babel/preset-env", {
+            "targets": { "node": 12 }
+          }
+        ]
       ],
       "plugins": ["istanbul"]
     },
     "main": {
       "presets": [
-        ["env", {
-          "targets": { "node": 7 }
-        }],
-        "stage-0"
+        [
+          "@babel/preset-env", {
+            "targets": { "node": 12 }
+          }
+        ]
       ]
     },
     "renderer": {
       "presets": [
-        ["env", {
-          "modules": false
-        }],
-        "stage-0"
+        [
+          "@babel/preset-env", {
+            "modules": false
+          }
+        ]
       ]
     },
     "web": {
       "presets": [
-        ["env", {
-          "modules": false
-        }],
-        "stage-0"
+        [
+          "@babel/preset-env", {
+            "modules": false
+          }
+        ]
       ]
     }
   },
-  "plugins": ["transform-runtime"]
+  "plugins": [
+    "@babel/transform-runtime",
+    "@babel/plugin-syntax-dynamic-import"
+  ]
 }

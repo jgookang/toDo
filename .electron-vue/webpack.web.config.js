@@ -5,7 +5,7 @@ process.env.BABEL_ENV = 'web'
 const path = require('path')
 const webpack = require('webpack')
 
-const MinifyPlugin = require("babel-minify-webpack-plugin")
+const TerserPlugin = require('terser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -38,14 +38,6 @@ let webConfig = {
         use: ['vue-style-loader', 'css-loader', 'sass-loader?indentedSyntax']
       },
       {
-        test: /\.less$/,
-        use: ['vue-style-loader', 'css-loader', 'less-loader']
-      },
-      {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
-      },
-      {
         test: /\.html$/,
         use: 'vue-html-loader'
       },
@@ -64,7 +56,8 @@ let webConfig = {
             loaders: {
               sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
               scss: 'vue-style-loader!css-loader!sass-loader',
-              less: 'vue-style-loader!css-loader!less-loader'
+              less: 'vue-style-loader!css-loader!less-loader',
+              styl: 'vue-style-loader!css-loader!stylus-loader'
             }
           }
         }
@@ -107,9 +100,11 @@ let webConfig = {
     new webpack.DefinePlugin({
       'process.env.IS_WEB': 'true'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    noEmitOnErrors: true // NoEmitOnErrorsPlugin
+  },
   output: {
     filename: '[name].js',
     path: path.join(__dirname, '../dist/web')
@@ -130,15 +125,23 @@ let webConfig = {
 if (process.env.NODE_ENV === 'production') {
   webConfig.devtool = ''
 
+  webConfig.optimization = Object.assign(webConfig.optimization, {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  })
+
   webConfig.plugins.push(
-    new MinifyPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../static'),
-        to: path.join(__dirname, '../dist/web/static'),
-        ignore: ['.*']
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '../static'),
+          to: path.join(__dirname, '../dist/web/static'),
+          globOptions: {
+            ignore: ['.*']
+          }
+        }
+      ]
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     }),

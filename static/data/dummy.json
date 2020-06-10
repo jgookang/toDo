@@ -1,0 +1,74 @@
+{"todos":[
+    {
+        "id":"1",
+        "thumbnail":"",
+        "category":"work",
+        "title":"Meeting",
+        "startDate":"2020-07-20 11:00:00",
+        "endDate":"",
+        "important":"3",
+        "filtered":"n"
+    },
+    {
+        "id":"2",
+        "thumbnail":"",
+        "category":"shopping",
+        "title":"Buying presents",
+        "startDate":"2020-07-21 11:00:00",
+        "endDate":"",
+        "important":"2",
+        "filtered":"n"
+    },
+    {
+        "id":"3",
+        "thumbnail":"",
+        "category":"appointment",
+        "title":"Dinner",
+        "startDate":"2020-07-22 11:00:00",
+        "endDate":"",
+        "important":"4",
+        "filtered":"n"
+    },
+    {
+        "id":"4",
+        "thumbnail":"",
+        "category":"work",
+        "title":"Meeting",
+        "startDate":"2020-07-23 11:00:00",
+        "endDate":"",
+        "important":"5",
+        "filtered":"n"
+    },
+    {
+        "id":"5",
+        "thumbnail":"",
+        "category":"cleaning",
+        "title":"Weekend cleaning",
+        "startDate":"2020-07-24 11:00:00",
+        "endDate":"",
+        "important":"2",
+        "filtered":"n"
+    },
+    {
+        "id":"6",
+        "thumbnail":"",
+        "category":"shopping",
+        "title":"Get new books",
+        "startDate":"2020-07-25 11:00:00",
+        "endDate":"",
+        "important":"3",
+        "filtered":"n"
+    },
+    {
+        "id":"7",
+        "thumbnail":"",
+        "category":"work",
+        "title":"Meeting",
+        "startDate":"2020-07-26 11:00:00",
+        "endDate":"",
+        "important":"1",
+        "filtered":"n"
+    }
+],
+"category":["work","cleaning","appointment", "shopping"]
+}
