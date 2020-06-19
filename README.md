@@ -1,28 +1,16 @@
-# todo
+# flutterapp
 
-> An electron-vue project
+A new Flutter application.
 
-#### Build Setup
+## Getting Started
 
-``` bash
-# install dependencies
-npm install
+This project is a starting point for a Flutter application.
 
-# serve with hot reload at localhost:9080
-npm run dev
+A few resources to get you started if this is your first Flutter project:
 
-# build electron application for production
-npm run build
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-# run unit tests
-npm test
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
-```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[45a3e22](https://github.com/SimulatedGREG/electron-vue/tree/45a3e224e7bb8fc71909021ccfdcfec0f461f634) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
