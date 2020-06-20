@@ -50,17 +50,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _addTodo() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _toDos.add(ToDoItem(title:'Dummy'));
-   });
+  final _textEditingController = TextEditingController();
+  _addTask() async {
+    await showDialog<String>(
+        context: context,
+        child: new _ModalWidget(
+            child: new AlertDialog(
+              content: new Row(
+                children: <Widget>[
+                  new Expanded(
+                      child: new TextField(
+                        controller: _textEditingController,
+                        autofocus: true,
+                        decoration: new InputDecoration(labelText: 'Add a task', hintText: 'Adding new task')))
+                ]
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                    onPressed: () async {
+                      setState(() {
+                        print ( _textEditingController.text);
+                        _toDos.add(ToDoItem(title: _textEditingController.text));
+                      });
+                      Navigator.pop(context);
+                      },
+                    child: const Text('Add')),
+                new FlatButton(
+                    onPressed: () { Navigator.pop(context); },
+                    child: const Text('Cancel'))
+              ],
+            )
+        ),
+    );
   }
 
   @override
@@ -78,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index){
+          itemBuilder: (context, index) {
             final toDo = _toDos[index].title;
             return Dismissible(
               // Show a red background as the item is swiped away.
@@ -88,8 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   _toDos.removeAt(index);
                 });
-                Scaffold
-                    .of(context)
+                Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text("$toDo Done")));
               },
               child: ListTile(
@@ -97,12 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             );
           },
-          separatorBuilder: (context, index){
+          separatorBuilder: (context, index) {
             return Divider();
-          }, itemCount: _toDos.length),
+          },
+          itemCount: _toDos.length),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addTodo,
-        tooltip: 'Add toDo',
+        onPressed: _addTask,
+        tooltip: 'Add a task',
         child: Icon(Icons.add),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
@@ -110,16 +131,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class _ModalWidget extends StatelessWidget {
+  final Widget child;
+
+  _ModalWidget({Key key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    final mediaQuery = MediaQuery.of(context);
+    return new AnimatedContainer(
+        duration: const Duration(microseconds: 300),
+        padding: mediaQuery.viewInsets,
+        child: child);
+  }
+}
+
 class ToDoItem {
   const ToDoItem({this.title});
+
   final String title;
 }
 
 final List<ToDoItem> _toDos = <ToDoItem>[
-  ToDoItem(title:'Meeting 10:00 am'),
-  ToDoItem(title:'Lunch 12:00 am'),
-  ToDoItem(title:'Meeting 3:00 pm'),
-  ToDoItem(title:'Dinner 7:00 pm'),
+  ToDoItem(title: 'Meeting 10:00 am'),
+  ToDoItem(title: 'Lunch 12:00 am'),
+  ToDoItem(title: 'Meeting 3:00 pm'),
+  ToDoItem(title: 'Dinner 7:00 pm'),
 ];
-
-
