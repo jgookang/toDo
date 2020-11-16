@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "29861490019",
+    "firebase_url": "https://lockservice-db034.firebaseio.com",
+    "project_id": "lockservice-db034",
+    "storage_bucket": "lockservice-db034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29861490019:android:34b1c6543f11474c2db756",
+        "android_client_info": {
+          "package_name": "com.todo.lockservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29861490019-qpl4htarj6or11o0a41djsqe8ibh1p21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO1eyn7vWhcNr-kRZxKhf__PRF0HRF4FI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29861490019-qpl4htarj6or11o0a41djsqe8ibh1p21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
