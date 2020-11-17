@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>29861490019-ce5jr2jrdhooolpcvtm546km120tp3g5.apps.googleusercontent.com</string>
+	<string>29861490019-dja817hu2q0ue5uchqp27hrnf1bq7jtu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.29861490019-ce5jr2jrdhooolpcvtm546km120tp3g5</string>
+	<string>com.googleusercontent.apps.29861490019-dja817hu2q0ue5uchqp27hrnf1bq7jtu</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDwE7D0kHmgJUN8AUc4r3F81knUyFGkNr8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.todo.locks</string>
+	<string>com.helloworld.flutterapp</string>
 	<key>PROJECT_ID</key>
 	<string>lockservice-db034</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:29861490019:ios:6049810ab87d5b172db756</string>
+	<string>1:29861490019:ios:f821eaf9536bf2d02db756</string>
 	<key>DATABASE_URL</key>
 	<string>https://lockservice-db034.firebaseio.com</string>
 </dict>

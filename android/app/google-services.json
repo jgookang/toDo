@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:29861490019:android:34b1c6543f11474c2db756",
+        "mobilesdk_app_id": "1:29861490019:android:62e49915d6644dbb2db756",
         "android_client_info": {
-          "package_name": "com.todo.lockservice"
+          "package_name": "com.helloworld.flutterapp"
         }
       },
       "oauth_client": [
@@ -30,6 +30,13 @@
             {
               "client_id": "29861490019-qpl4htarj6or11o0a41djsqe8ibh1p21.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "29861490019-dja817hu2q0ue5uchqp27hrnf1bq7jtu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.helloworld.flutterapp"
+              }
             }
           ]
         }
